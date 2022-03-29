@@ -1,0 +1,42 @@
+[
+    {
+        "test": ".*\\.js$",
+        "sourceMaps": true,
+        "jsc": {
+            "parser": {
+                "syntax": "ecmascript"
+            }
+        }
+    },
+    {
+        "test": ".*\\.ts$",
+        "sourceMaps": true,
+        "jsc": {
+            "parser": {
+                "syntax": "typescript"
+            }
+        }
+    },
+    {
+        "test": ".*\\.jsx$",
+        "sourceMaps": true,
+
+        "jsc": {
+            "parser": {
+                "syntax": "ecmascript",
+                "jsx": true
+            }
+        }
+    },
+    {
+        "test": ".*\\.tsx$",
+        "sourceMaps": true,
+        "jsc": {
+            "parser": {
+                "syntax": "typescript",
+                "tsx": true
+            }
+        }
+    }
+]
+

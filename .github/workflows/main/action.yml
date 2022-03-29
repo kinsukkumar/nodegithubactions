@@ -1,0 +1,39 @@
+name: 'Main'
+
+description: 'Constitutes the main part of our build process'
+
+runs:
+    using: "composite"
+
+    steps:
+        - name: Set up Node.js version
+          uses: actions/setup-node@v2
+          with:
+            node-version: "14.15.1"
+
+        - name: Install npm 7 to enable workspace support
+          run: |
+            npm install -g npm@^7
+            npm -v
+          shell: bash
+
+        - name: npm install and build
+          run: |
+            npm install
+            echo "Test"
+            ls ./node_modules/@swc
+            npm run build
+          shell: bash
+
+        - name: symlink fix for Azure
+          run: |
+            rsync --exclude ./node_modules/.bin --archive --copy-links ./node_modules/ ./node_modules_cp/
+            rsync --archive  ./node_modules/.bin ./node_modules_cp/.bin
+            rm -r ./node_modules/
+            mv ./node_modules_cp/ ./node_modules/
+          shell: bash
+
+        - name: npm test
+          run: |
+            npm run test --if-present
+          shell: bash

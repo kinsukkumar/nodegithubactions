@@ -1,0 +1,41 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy Node.js app to Azure Web App - prelistweb(staging)
+
+on:
+    push:
+        branches:
+            - master
+    workflow_dispatch:
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Main install, build and test
+              uses: ./.github/workflows/main
+
+            - name: "Deploy to Azure Web App"
+              uses: azure/webapps-deploy@v2
+              with:
+                  app-name: "prelistweb"
+                  slot-name: "staging"
+                  publish-profile: ${{ secrets.AzureAppService_PublishProfile_37e1e2c84c9c4b1fa10bfc5996730218 }}
+                  package: .
+    # deploy:
+    #   runs-on: ubuntu-latest
+    #   environment:
+    #     name: 'staging'
+    #     url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    #   - name: 'Deploy to Staging slot from Master'
+    #     id: deploy-to-webapp
+    #     uses: azure/webapps-deploy@v2
+    #     with:
+    #       app-name: 'prelistweb'
+    #       slot-name: 'staging'
+    #       publish-profile: ${{ secrets.AzureAppService_PublishProfile_37e1e2c84c9c4b1fa10bfc5996730218 }}
+    #       package: .

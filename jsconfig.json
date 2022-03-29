@@ -1,0 +1,8 @@
+{
+    "compilerOptions":{
+        "jsx": "react",
+        "module": "commonJS",
+        "moduleResolution": "node",
+    },
+    "exclude": ["node_modules"]
+}
